@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.use(process.env.APP_USER_ROUTE, Router)
 
-app.listen(7000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Server is running on port 7000");
 })
 
