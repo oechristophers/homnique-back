@@ -30,7 +30,7 @@ const UserSignInController = async(req, res) => {
 
         res.cookie('auth-token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
+            secure: false, // Only send over HTTPS in production
             sameSite: 'Strict',
             maxAge: 60 * 60 * 1000, // 1 hour
         });
@@ -38,7 +38,7 @@ const UserSignInController = async(req, res) => {
         // Set user role in another cookie (optional but useful for middleware)
         res.cookie('user-role', user.role, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: false,
             sameSite: 'Strict',
             maxAge: 60 * 60 * 1000,
         });
