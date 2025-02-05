@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
 const ReportSchema = new mongoose.Schema({
-    caseID: { type: String, required: true },
+    caseId: { type: String, required: true, unique: true },
     reportName: { type: String, required: true },
-    reportType: { type: String, required: true }, 
-    staff: { type: String, required: true },
-    date: { type: Date, required: true }
+    reportType: { type: String, enum: ['Placement', 'Young Person', 'Staff Performance', 'Incident Investigation'], required: true },
+    staffName: { type: String, required: true },
+    dateCreated: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Report', ReportSchema);
+const Report = mongoose.model('Report', ReportSchema);
+module.exports = Report;
+

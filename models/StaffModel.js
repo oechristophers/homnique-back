@@ -5,4 +5,5 @@ const StaffSchema = new mongoose.Schema({
     role: { type: String, required: true } // Placement Worker, Key Worker, etc.
 });
 
-module.exports = mongoose.model('Staff', StaffSchema);
+const StaffModel = mongoose.model('Staff', StaffSchema);
+module.exports= StaffModel;

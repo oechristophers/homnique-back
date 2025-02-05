@@ -1,0 +1,221 @@
+// const ReportModel = require('../models/ReportModel');
+
+// // Create a new report
+// const createReport = async (req, res) => {
+//     try {
+//         const { caseId, reportName, reportType, staffName } = req.body;
+
+//         // Validate required fields
+//         if (!caseId || !reportName || !reportType || !staffName) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: 'Missing required fields',
+//                 error: true
+//             });
+//         }
+
+//         // Create new report
+//         const newReport = new ReportModel({
+//             caseId,
+//             reportName,
+//             reportType,
+//             staffName
+//         });
+
+//         const savedReport = await newReport.save();
+
+//         res.status(201).json({
+//             success: true,
+//             message: 'Report created successfully',
+//             data: savedReport
+//         });
+
+//     } catch (error) {
+//         if (error.code === 11000) { // Duplicate caseId error
+//             return res.status(400).json({
+//                 success: false,
+//                 message: 'Case ID already exists',
+//                 error: true
+//             });
+//         }
+
+//         res.status(500).json({
+//             success: false,
+//             message: error.message,
+//             error: true
+//         });
+//     }
+// };
+
+// // Get all reports with filters
+// const getReports = async (req, res) => {
+//     try {
+//         const { 
+//             fromDate, 
+//             toDate, 
+//             reportType, 
+//             staffName, 
+//             caseId 
+//         } = req.query;
+
+//         const filters = {};
+
+//         // Add filters if they exist in query
+//         if (fromDate && toDate) {
+//             filters.dateCreated = {
+//                 $gte: new Date(fromDate),
+//                 $lte: new Date(toDate)
+//             };
+//         }
+
+//         if (reportType) {
+//             filters.reportType = reportType;
+//         }
+
+//         if (staffName) {
+//             filters.staffName = staffName;
+//         }
+
+//         if (caseId) {
+//             filters.caseId = caseId;
+//         }
+
+//         const reports = await ReportModel.find(filters).sort({ dateCreated: -1 });
+
+//         res.status(200).json({
+//             success: true,
+//             message: 'Reports fetched successfully',
+//             data: reports
+//         });
+
+//     } catch (error) {
+//         res.status(500).json({
+//             success: false,
+//             message: error.message,
+//             error: true
+//         });
+//     }
+// };
+
+// // Get single report by ID
+// const getReportById = async (req, res) => {
+//     try {
+//         const report = await ReportModel.findById(req.params.id);
+        
+//         if (!report) {
+//             return res.status(404).json({
+//                 success: false,
+//                 message: 'Report not found',
+//                 error: true
+//             });
+//         }
+
+//         res.status(200).json({
+//             success: true,
+//             message: 'Report fetched successfully',
+//             data: report
+//         });
+
+//     } catch (error) {
+//         res.status(500).json({
+//             success: false,
+//             message: error.message,
+//             error: true
+//         });
+//     }
+// };
+
+// // Update report
+// const updateReport = async (req, res) => {
+//     try {
+//         const { reportName, reportType, staffName } = req.body;
+//         const reportId = req.params.id;
+
+//         const updatedReport = await ReportModel.findByIdAndUpdate(
+//             reportId,
+//             {
+//                 reportName,
+//                 reportType,
+//                 staffName
+//             },
+//             { new: true, runValidators: true }
+//         );
+
+//         if (!updatedReport) {
+//             return res.status(404).json({
+//                 success: false,
+//                 message: 'Report not found',
+//                 error: true
+//             });
+//         }
+
+//         res.status(200).json({
+//             success: true,
+//             message: 'Report updated successfully',
+//             data: updatedReport
+//         });
+
+//     } catch (error) {
+//         res.status(500).json({
+//             success: false,
+//             message: error.message,
+//             error: true
+//         });
+//     }
+// };
+
+// // Delete report
+// const deleteReport = async (req, res) => {
+//     try {
+//         const deletedReport = await ReportModel.findByIdAndDelete(req.params.id);
+
+//         if (!deletedReport) {
+//             return res.status(404).json({
+//                 success: false,
+//                 message: 'Report not found',
+//                 error: true
+//             });
+//         }
+
+//         res.status(200).json({
+//             success: true,
+//             message: 'Report deleted successfully',
+//             data: deletedReport
+//         });
+
+//     } catch (error) {
+//         res.status(500).json({
+//             success: false,
+//             message: error.message,
+//             error: true
+//         });
+//     }
+// };
+
+// module.exports = {
+//     createReport,
+//     getReports,
+//     getReportById,
+//     updateReport,
+//     deleteReport
+// };
+
+
+// const express = require('express');
+// const router = express.Router();
+// const {
+//     createReport,
+//     getReports,
+//     getReportById,
+//     updateReport,
+//     deleteReport
+// } = require('../controllers/reportController');
+
+// // Report routes
+// router.post('/reports', createReport);
+// router.get('/reports', getReports);
+// router.get('/reports/:id', getReportById);
+// router.put('/reports/:id', updateReport);
+// router.delete('/reports/:id', deleteReport);
+
+// module.exports = router;
