@@ -32,7 +32,7 @@ async function sendCredentials(email, username, password) {
       
               <p style="font-size: 16px; color: #333;">Please change your password after logging in for security reasons.</p>
               
-              <a href="https://hominique-test.vercel.app/auth/sign-in"  
+              <a href="https://homnique-test.vercel.app/auth/sign-in"   
                  style="display: block; text-align: center; padding: 10px 20px; background-color: #007bff; color: #fff; 
                  text-decoration: none; border-radius: 5px; font-size: 16px; margin-top: 20px;">
                  Login Now
