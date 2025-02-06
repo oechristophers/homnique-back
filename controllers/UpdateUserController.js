@@ -19,8 +19,8 @@ const updateUser = async (req, res) => {
       });
     }
 
-    // If password is provided, require current password
-    if (password) {
+    // If newPassword is provided, require current password
+    if (newPassword) {
       if (!currentPassword) {
         console.error("Current password is required to update password");
         return res.status(400).json({
@@ -66,17 +66,6 @@ const updateUser = async (req, res) => {
         success: false,
       });
     }
-
-    // Logging the stored password hash after the update
-    const userAfterUpdate = await UserModel.findById(id);
-    console.log("Stored password hash after update:", userAfterUpdate.password); // Check stored password hash
-
-    // Check if the updated password matches
-    const isNewPasswordMatch = await bcrypt.compare(
-      password,
-      userAfterUpdate.password
-    );
-    console.log("New password match:", isNewPasswordMatch); // Debugging log to check if the updated password matches
 
     console.log(`User updated successfully with ID: ${id}`);
     res.status(200).json({
